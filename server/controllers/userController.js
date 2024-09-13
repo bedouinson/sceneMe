@@ -1,12 +1,16 @@
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 exports.createUser = async (req, res) => {
   const { username, password } = req.body;
   try {
     const user = new User({ username, password });
     await user.save();
-    res.status(201).send({ message: "User created successfully", user });
+    const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
+      expiresIn: "1h",
+    });
+    res.status(201).send({ message: "User created successfully", user, token });
   } catch (err) {
     res.status(400).send(err);
   }
@@ -23,7 +27,10 @@ exports.loginUser = async (req, res) => {
     if (!isMatch) {
       return res.status(400).send({ message: "Invalid credentials" });
     }
-    return res.status(200).send({ message: "Login successful", user });
+    const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
+      expiresIn: "1h",
+    });
+    return res.status(200).send({ message: "Login successful", user, token });
   } catch (err) {
     res.status(400).send(err);
   }
