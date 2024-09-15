@@ -33,7 +33,7 @@ const Login = () => {
         backgroundPosition: "center",
       }}
     >
-      <div className="bg-lightBackground p-6 rounded-lg shadow-lg w-full max-w-md">
+      <div className="bg-lightBackground p-6 rounded-lg shadow-lg w-full max-w-96">
         <h2 className="text-2xl font-semibold text-center mb-4 text-primary">
           Welcome in!
         </h2>
@@ -55,7 +55,7 @@ const Login = () => {
           />
           <button
             type="submit"
-            className="w-full bg-secondary text-white py-2 rounded-lg hover:bg-accent transition duration-300"
+            className="w-40 bg-secondary text-white py-2 rounded-lg hover:bg-accent transition duration-300"
           >
             Register
           </button>
