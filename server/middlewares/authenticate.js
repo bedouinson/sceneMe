@@ -3,7 +3,6 @@ const User = require("../models/User");
 
 exports.authenticate = async (req, res, next) => {
   const token = req.header("Authorization")?.replace("Bearer ", "");
-
   if (!token) {
     return res.status(401).send({ message: "Authentication required" });
   }

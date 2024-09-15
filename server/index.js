@@ -7,9 +7,8 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-
-
 app.use("/users", require("./routes/user"));
+app.use("/lists", require("./routes/list"));
 
 mongoose
   .connect(process.env.MONGO_URI, {
@@ -24,5 +23,13 @@ mongoose
   });
 
 app.listen(process.env.PORT, () => {
-  console.log("Server is running on port 3000");
+  console.log("Server is running on port", process.env.PORT);exports.getLists = async (req, res) => {
+    try {
+      const userId = req.user._id;
+      const lists = await List.find({ user_id: userId });
+      res.status(200).json(lists);
+    } catch (e) {
+      res.status(400).json({ message: e.message });
+    }
+  };
 });
