@@ -1,9 +1,10 @@
 import "./App.css";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import { AuthProvider } from "./Context/AuthContext";
-import {Routes, Route} from "react-router-dom";
 import Home from "./pages/Home";
+import Lists from "./pages/Lists";
+import { AuthProvider } from "./Context/AuthContext";
+import { Routes, Route } from "react-router-dom";
 
 function App() {
   return (
@@ -20,6 +21,10 @@ function App() {
         <Route
           path="/register"
           element={<Register />}
+        />
+        <Route
+          path="/lists"
+          element={<Lists />}
         />
       </Routes>
     </AuthProvider>
