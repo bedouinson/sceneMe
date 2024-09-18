@@ -10,15 +10,13 @@ const {
   getListsById,
 } = require("../controllers/listController");
 
-router.use(authenticate);
+router.get("/", authenticate, getLists);
 
-router.get("/", getLists);
+router.post("/", authenticate, createList);
 
-router.post("/", createList);
+router.put("/:id", authenticate, updateList);
 
-router.put("/:id", updateList);
-
-router.delete("/:id", deleteList);
+router.delete("/:id", authenticate, deleteList);
 
 router.get("/:id", getListsById);
 
