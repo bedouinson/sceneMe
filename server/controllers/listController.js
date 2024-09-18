@@ -1,4 +1,5 @@
-const { List } = require("../models/List");
+const { default: mongoose } = require("mongoose");
+const List = require("../models/List");
 
 exports.getLists = async (req, res) => {
   try {
@@ -32,7 +33,7 @@ exports.createList = async (req, res) => {
 
 exports.updateList = async (req, res) => {
   try {
-    const { id } = req.params; 
+    const { id } = req.params;
     const { name, items } = req.body;
 
     if (!name && !items) {
@@ -51,7 +52,7 @@ exports.updateList = async (req, res) => {
       list.items = items;
     }
 
-    await list.save(); 
+    await list.save();
     res.status(200).json(list);
   } catch (e) {
     res.status(500).json({ message: e.message });
@@ -84,6 +85,6 @@ exports.getListsById = async (req, res) => {
     }
     res.status(200).json(lists);
   } catch (e) {
-    res.status(500).json({ message: "An error occurred while fetching lists" });
+    res.status(500).json({ message: e.message });
   }
 };
